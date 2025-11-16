@@ -28,10 +28,10 @@ function displayFull(src) {
 
 function addtoFavorites(date, imageThumb, imageSource) {
   //Check if the image is already in favorites
-  let exists = false;
+  let exists = false; //Assume it doesn't exist
   for (let item of favorites) {
     if (item.date === date) {
-      exists = true;
+      exists = true; //Found a match then change to true
       break;
     }
   }
@@ -46,9 +46,9 @@ function addtoFavorites(date, imageThumb, imageSource) {
 }
 
 function removeFromFavorites(date) {
-  const index = favorites.findIndex((item) => item.date === date);
+  const index = favorites.findIndex((item) => item.date === date); //Find the index of the item to be removed
   if (index !== -1) {
-    favorites.splice(index, 1);
+    favorites.splice(index, 1); //Remove the item at the found index
     localStorage.setItem("favorites", JSON.stringify(favorites));
     renderFavorites();
   } else {
@@ -57,10 +57,10 @@ function removeFromFavorites(date) {
 }
 
 async function renderBanner(dateStr) {
-  const formatedDate = dateStr.replaceAll("-", "/");
+  const formatedDate = dateStr.replaceAll("-", "/"); //Convert date to YYYY/MM/DD format
   try {
-    const res = await fetch(`${baseUrl}${formatedDate}`);
-    const data = await res.json();
+    const res = await fetch(`${baseUrl}${formatedDate}`); //Send GET request to Wikimedia API
+    const data = await res.json(); //Parse the JSON response
     $banner.innerHTML = `
       <div class="bannerImg">
         <img src='${data.image.thumbnail.source}' alt='${data.image.title}'>
@@ -71,16 +71,16 @@ async function renderBanner(dateStr) {
       <div class="bannerContent">
         <div>
           <h2>${data.image.title.split(":")[1]}</h2>
-          <p>${data.mostread.date.slice(0, -1)}</p>
-          </div>
-            <p >${data.image.description.text}</p>
-          <div>
+          <p>${dateStr}</p>
+        </div>
+        <p>${data.image.description.text}</p>
+        <div>
           <button id='expandImg'>Expand Image</button>
         </div>
       </div>
-    `;
+    `; //Fill the template with fetched data
 
-    // Add event listener for the star button
+    // Add event listener for the star button to add to favorites
     const $starBtn = document.querySelector(".starBtn");
     $starBtn.addEventListener("click", () => {
       addtoFavorites(
@@ -119,7 +119,7 @@ function renderFavorites() {
     favDiv.innerHTML = `
       <img src='${item.imageThumb}' alt='Favorite Image'>
       <div class="removeBtn">
-        <img src="./images/remove.svg" alt="" />
+        <img src="./images/remove.svg" alt="removeBtn" />
       </div>
     `;
 
@@ -143,21 +143,21 @@ $input.addEventListener("change", (e) => {
   renderBanner(date);
 });
 
+// Event listener for "View All" button
+$allBtn.addEventListener("click", () => {
+  $favoritePictures.style.flexWrap = "wrap"; //Change layout to wrap
+});
+
 //When document loads, set input to today's date and render banner
 document.addEventListener("DOMContentLoaded", () => {
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
   $input.value = today;
   renderBanner(today);
   // Load favorites from localStorage
-  const storedFavorites = localStorage.getItem("favorites");
+  const storedFavorites = localStorage.getItem("favorites"); //Retrieve favorites from localStorage
   if (storedFavorites) {
-    const parsedFavorites = JSON.parse(storedFavorites);
+    const parsedFavorites = JSON.parse(storedFavorites); //Parse the JSON string to object
     parsedFavorites.forEach((item) => favorites.push(item));
     renderFavorites();
   }
-});
-
-// Event listener for "View All" button
-$allBtn.addEventListener("click", () => {
-  $favoritePictures.style.flexWrap = "wrap";
 });
