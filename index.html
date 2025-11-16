@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Astronomy Picture of the day</title>
+    <title>Wikimedia Picture of the day</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,63 +14,34 @@
   </head>
   <body>
     <div class="container">
-      <header>
-        <h1>Astronomy Picture of the Day</h1>
+      <div class="overlay" aria-hidden="true"></div>
+      <header role="header">
+        <h1>Wikimedia Picture of the Day</h1>
         <div class="input">
-          <input type="date" label="datePicker" />
+          <input type="date" aria-label="Select date for featured picture" />
         </div>
       </header>
 
-      <main>
-        <div class="banner"></div>
-        <div class="myFavorites">
+      <main role="main">
+        <div class="banner" role="banner" aria-label="Featured picture"></div>
+
+        <div
+          class="myFavorites"
+          role="region"
+          aria-labelledby="favoritesHeading"
+        >
           <div class="favoritesTitle">
             <h2>My Favorites</h2>
-            <button>View All</button>
+            <button id="allBtn" aria-label="View all favorites">
+              View All
+            </button>
           </div>
-          <div class="favoritesPictures">
-            <div class="favoriteImg">
-              <img src="./images/banner.jpg" alt="" />
-              <div class="removeBtn">
-                <img src="./images/remove.svg" alt="" />
-              </div>
-            </div>
-            <div class="favoriteImg">
-              <img src="./images/banner.jpg" alt="" />
-              <div class="removeBtn">
-                <img src="./images/remove.svg" alt="" />
-              </div>
-            </div>
-            <div class="favoriteImg">
-              <img src="./images/banner.jpg" alt="" />
-              <div class="removeBtn">
-                <img src="./images/remove.svg" alt="" />
-              </div>
-            </div>
-            <div class="favoriteImg">
-              <img src="./images/banner.jpg" alt="" />
-              <div class="removeBtn">
-                <img src="./images/remove.svg" alt="" />
-              </div>
-            </div>
-            <div class="favoriteImg">
-              <img src="./images/banner.jpg" alt="" />
-              <div class="removeBtn">
-                <img src="./images/remove.svg" alt="" />
-              </div>
-            </div>
-            <div class="favoriteImg">
-              <img src="./images/banner.jpg" alt="" />
-              <div class="removeBtn">
-                <img src="./images/remove.svg" alt="" />
-              </div>
-            </div>
-          </div>
+          <div class="favoritePictures"></div>
         </div>
       </main>
 
-      <footer>
-        <p>Images courtesy of NASA's APOD API.</p>
+      <footer role="contentinfo">
+        <p>Images courtesy of Wikimedia's API.</p>
         <p>©2025 Yan Bao. All rights reserved.</p>
       </footer>
     </div>
