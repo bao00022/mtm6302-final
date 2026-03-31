@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="./css/output.css" />
+  </head>
+
+  <body class="min-h-screen flex flex-col">
+    <header class="h-32 w-full relative flex items-center justify-center">
+      <img class="absolute inset-0 w-full h-full object-cover" src="./images/banner.jpg" alt="banner" />
+      <h1 class="z-10 text-4xl text-gray-800 bg-white/70 p-4 rounded-lg">Welcome to the Quiz App!</h1>
+    </header>
+
+    <!-- Score display -->
+    <div class="w-full py-4 flex items-center justify-center gap-4">
+      <p>Correct: <span id="correct" class="text-green-600">0</span></p>
+      <button id="reset" class="btn-reset">Reset</button>
+      <p>Wrong: <span id="wrong" class="text-red-600">0</span></p>
+    </div>
+
+    <main class="flex-1 flex flex-col items-center justify-center p-4 gap-8">
+      <!-- Exam results, hidden by default. -->
+      <div id="results" class="hidden w-full md:w-3/4 px-4 py-8 bg-gray-100 rounded-lg shadow-md flex flex-col gap-8"></div>
+
+      <!-- Message notification box, hidden by default - no style -->
+      <div id="message"></div>
+
+      <!-- Difficulty Selector Form -->
+      <form id="start" class="w-full md:w-3/4 px-4 py-8 gap-8 bg-gray-100 rounded-lg shadow-md flex flex-col items-center">
+        <div class="flex gap-4 items-center">
+          <label for="difficulty" class="font-bold">Choose your level:</label>
+          <select name="difficulty" id="difficulty" class="px-4 py-2 rounded border border-gray-400 cursor-pointer">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <div><button type="submit" class="btn">Start Quiz</button></div>
+      </form>
+
+      <!-- Quiz form, hidden by default -->
+      <form id="quiz" class="hidden w-full md:w-3/4 px-4 py-8 bg-gray-100 rounded-lg shadow-md flex flex-col gap-16">
+        <div id="quiz-cards" class="flex flex-col gap-8"></div>
+        <div class="flex justify-center w-full">
+          <button type="submit" class="btn">Submit</button>
+        </div>
+      </form>
+    </main>
+
+    <footer class="h-16 flex items-center justify-center">
+      <p>&copy; 2025 Quiz App. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="./js/script.js"></script>
+  </body>
+</html>
